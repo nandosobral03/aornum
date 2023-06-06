@@ -3,6 +3,7 @@
 	import Cookies from 'js-cookie';
 	import type { LayoutServerData } from './$types';
     export let data: LayoutServerData;
+	import showDarkModeStore from '$lib/stores/darkmodeStore';
 
     let darkMode = data.darkmode ? data.darkmode : false;
 	const config = {
@@ -11,7 +12,7 @@
 				value: 500,
 				density: {
 					enable: true,
-					value_area: 800
+					value_area: 500
 				}
 			},
 			color: {
@@ -137,13 +138,15 @@
 
 <div>
 	<section>
-		<button class="material-symbols-outlined" on:click={toggleDarkMode} on:keydown={(e) => e.key === 'Enter' && toggleDarkMode()}>
-			{#if darkMode}
-			light_mode
-			{:else}
-			dark_mode
-			{/if}
-		</button>
+		{#if $showDarkModeStore}
+			<button class="material-symbols-outlined" on:click={toggleDarkMode} on:keydown={(e) => e.key === 'Enter' && toggleDarkMode()}>
+				{#if darkMode}
+				light_mode
+				{:else}
+				dark_mode
+				{/if}
+			</button>
+		{/if}
 		<slot />
 		<div id="particles">
 		</div>
@@ -163,8 +166,8 @@
 
 	section{
 		position: relative;
-		width: calc(100% - 1rem);
-		height: calc(100% - 1rem);
+		width: 100%;
+		height: 100%;
         border: 2px solid var(--primary);
 		background-color: var(--background);
 	}
@@ -176,7 +179,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-		padding: 1rem;
+		padding: clamp(0.5rem, 3vw, 1rem);
 		position: relative;
 		max-height: 100%;
 		
