@@ -54,7 +54,7 @@
 	
 		
 	]
-	let selected = 0;
+	let selected = -1;
 </script>
 
 <section>
@@ -67,7 +67,10 @@
 				{#each projects as project}
 				<li 
 					class:active={selected === projects.indexOf(project)}
-					on:click={() => selected = projects.indexOf(project)} 
+					on:click={() => {
+						selected = -1;
+						setTimeout(() => selected = projects.indexOf(project), 150);
+					}}
 					on:keydown={(e) => {if(e.key === "Enter") selected = projects.indexOf(project)}}>
 					
 					{project.name} 
@@ -76,9 +79,9 @@
 				{/each}
 			</ul>
 		</div>
-		<div class="active-project">
+		<div class="active-project" >
 			{#if selected >= 0}
-				<ActiveProject project={projects[selected]} on:close={() => selected = -1}/>
+				<ActiveProject project={projects[selected]} on:close={() => selected = -1} />
 			{/if}
 			</div>
 	</article>

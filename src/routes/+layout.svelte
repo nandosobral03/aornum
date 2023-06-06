@@ -4,19 +4,20 @@
 	import type { LayoutServerData } from './$types';
     export let data: LayoutServerData;
 	import showDarkModeStore from '$lib/stores/darkmodeStore';
-
+    import { loadFull } from "tsparticles";
+	let particlesModule : any;
     let darkMode = data.darkmode ? data.darkmode : false;
 	const config = {
 		particles: {
-			number: {
-				value: 500,
+            number: {
+				value: 150,
 				density: {
 					enable: true,
-					value_area: 500
+					value_area: 800
 				}
 			},
 			color: {
-				value: '#252424'
+				value: darkMode ? '#f5f5f5' : '#252424'
 			},
 			shape: {
 				type: 'circle',
@@ -34,106 +35,69 @@
 				}
 			},
 			opacity: {
-				value: 0.9,
-				random: true,
+				value: 0.5,
+				random: false,
 				anim: {
 					enable: true,
-					speed: 1,
-					opacity_min: 0,
+					speed: 0.5,
+					opacity_min: 0.1,
 					sync: false
 				}
 			},
 			size: {
-				value: 1,
+				value: 2,
 				random: false,
-				anim: {
-					enable: false,
-					speed: 4,
-					size_min: 0.3,
-					sync: false
-				}
 			},
-			line_linked: {
-				enable: false,
-				distance: 150,
-				color: '#ffffff',
-				opacity: 0.4,
-				width: 1
-			},
-			move: {
-				enable: true,
-				speed: 1,
-				direction: 'none',
-				random: true,
-				straight: false,
-				out_mode: 'out',
-				bounce: false,
-				attract: {
-					enable: false,
-					rotateX: 600,
-					rotateY: 600
-				}
-			}
+            links: {
+                enable: false,
+                color: "#000"
+            },
+            move: {
+                enable: true
+            },
 		},
-		interactivity: {
-			detect_on: 'canvas',
-			events: {
-				onhover: {
-					enable: false,
-					mode: 'bubble'
-				},
-				onclick: {
-					enable: false,
-					mode: 'repulse'
-				},
-				resize: true
-			},
-			modes: {
-				grab: {
-					distance: 400,
-					line_linked: {
-						opacity: 1
-					}
-				},
-				bubble: {
-					distance: 250,
-					size: 0,
-					duration: 2,
-					opacity: 0,
-					speed: 3
-				},
-				repulse: {
-					distance: 400,
-					duration: 0.4
-				},
-				push: {
-					particles_nb: 4
-				},
-				remove: {
-					particles_nb: 2
-				}
-			}
+		fullScreen: {
+			enable: false,
+			zIndex: 2
 		},
-		retina_detect: true
+		
 	};
 
-	onMount(() => {
+	let onParticlesLoaded = (event:any) => {
+        const particlesContainer = event.detail.particles;
+		
+    };
+
+	let ParticlesComponent:any;
+
+	onMount(async () => {
 		config.particles.color.value = darkMode ? '#f5f5f5' : '#252424';
-		loadParticles();
+        particlesModule = await import("svelte-particles");
+		ParticlesComponent = particlesModule.default;
 	});
 
-	const loadParticles = () => {
-		// @ts-ignore
-		particlesJS('particles', config);
-	};
 
-    const toggleDarkMode = () => {
+	let particlesInit = async (main: any) => {
+        // you can use main to customize the tsParticles instance adding presets or custom shapes
+        // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+        // starting from v2 you can add only the features you need reducing the bundle size
+        await loadFull(main);
+    };
+
+    const loadParticles = async () => {
+		config.particles.color.value = darkMode ? '#f5f5f5' : '#252424';
+		document.getElementById('canvas')?.style.setProperty('position', 'absolute !important');
+		ParticlesComponent = particlesModule.default;
+	}
+	
+	const toggleDarkMode = () => {
         darkMode = !darkMode;
 		document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
 		config.particles.color.value = darkMode ? '#f5f5f5' : '#252424';
         Cookies.set('darkmode', darkMode ? 'dark' : 'light');
         loadParticles();        
     }
+
 </script>
 
 <div>
@@ -148,13 +112,26 @@
 			</button>
 		{/if}
 		<slot />
-		<div id="particles">
-		</div>
+		<svelte:component
+			this="{ParticlesComponent}"
+			options="{config}"
+			on:particlesLoaded="{onParticlesLoaded}"
+			particlesInit="{particlesInit}"
+			id="particles"
+		/>
 	</section>
 </div>
 
 <style lang="scss">
-	#particles {
+
+
+	section{
+		position: relative;
+		width: 100%;
+		height: 100%;
+        border: 2px solid var(--primary);
+		background-color: var(--background);
+		:global(#particles) {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -163,13 +140,6 @@
 		transition: all 0.3s ease-in-out;
 		z-index: 0;
 	}
-
-	section{
-		position: relative;
-		width: 100%;
-		height: 100%;
-        border: 2px solid var(--primary);
-		background-color: var(--background);
 	}
 
     div{
@@ -185,13 +155,13 @@
 		
 		overflow: auto;
 		:global(canvas){
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: 0;
-		}
+			position: absolute !important;
+			top: 0 !important;
+			left: 0 !important;
+			width: 100% !important;
+			height: 100% !important;
+			z-index: 0 !important;
+	}
     }
 	button{
 		position: absolute;
@@ -209,4 +179,5 @@
 		font-size: 1.2rem;
 		z-index: 2;
 	}
+	
 </style>

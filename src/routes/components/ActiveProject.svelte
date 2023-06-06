@@ -3,6 +3,7 @@
 	import type { Project } from "$lib/models/project.model";
 	import showDarkModeStore from "$lib/stores/darkmodeStore";
 	import { createEventDispatcher, onMount } from "svelte";
+	import { fade, slide } from "svelte/transition";
     export let project: Project;
 
     const dispatch = createEventDispatcher();
@@ -16,7 +17,7 @@
         }
     })
 </script>
-<div class="active-project">
+<div class="active-project" transition:fade>
     <header>
         <h2>
             {project.name}
