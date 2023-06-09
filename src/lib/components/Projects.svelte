@@ -79,11 +79,11 @@
 				{/each}
 			</ul>
 		</div>
-		<div class="active-project" >
-			{#if selected >= 0}
-				<ActiveProject project={projects[selected]} on:close={() => selected = -1} />
-			{/if}
+		{#if selected >= 0}
+			<div class="active-project" >
+					<ActiveProject project={projects[selected]} on:close={() => selected = -1} />
 			</div>
+		{/if}
 	</article>
 	
 </section>
@@ -111,7 +111,9 @@
 		flex-grow: 1;
 		div{
 			flex: 1;
-			height: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
 			ul{
 				display: flex;
 				flex-direction: column;
@@ -147,6 +149,8 @@
 			left: 0;
 			background-color: var(--background);
 			z-index: 100;
+			height: 100%;
+			width: 100%;
 		}
 	}
 

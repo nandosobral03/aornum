@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import { browser } from "$app/environment";
 	import type { Project } from "$lib/models/project.model";
-	import showDarkModeStore from "$lib/stores/darkmodeStore";
+	import {showDarkModeStore, showSectionStore} from "$lib/stores/uiStore";
 	import { createEventDispatcher, onMount } from "svelte";
 	import { fade, slide } from "svelte/transition";
     export let project: Project;
@@ -11,8 +11,10 @@
     onMount(() => {
         if(browser && window.innerWidth < 768){
             showDarkModeStore.set(false);
+            showSectionStore.set(false);
             return () => {
                 showDarkModeStore.set(true);
+                showSectionStore.set(true);
             }
         }
     })
@@ -38,6 +40,7 @@
 
 <style lang='scss'>
     .active-project {
+        background-color: var(--background);
         padding: 1rem;
         width: 100%;
         height: 100%;

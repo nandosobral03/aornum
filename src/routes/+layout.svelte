@@ -3,7 +3,7 @@
 	import Cookies from 'js-cookie';
 	import type { LayoutServerData } from './$types';
     export let data: LayoutServerData;
-	import showDarkModeStore from '$lib/stores/darkmodeStore';
+	import { showDarkModeStore } from '$lib/stores/uistore';
     import { loadFull } from "tsparticles";
 	let particlesModule : any;
     let darkMode = data.darkmode ? data.darkmode : false;
@@ -78,9 +78,6 @@
 
 
 	let particlesInit = async (main: any) => {
-        // you can use main to customize the tsParticles instance adding presets or custom shapes
-        // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-        // starting from v2 you can add only the features you need reducing the bundle size
         await loadFull(main);
     };
 

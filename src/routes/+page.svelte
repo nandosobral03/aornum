@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Projects from './components/Projects.svelte';
-	import Bio from './components/Bio.svelte';
+	import Projects from '../lib/components/Projects.svelte';
+	import Bio from '../lib/components/Bio.svelte';
+	import Contact from '$lib/components/Contact.svelte';
+	import { showSectionStore } from '$lib/stores/uiStore';
     let activeSection = 0;
     let scrollContainer: HTMLDivElement;
     let ranges: { offset: number, height: number }[] = [];
@@ -49,33 +51,21 @@
 <div class="content" on:scroll={handleScroll} bind:this={scrollContainer}>
 	<Bio />
     <Projects />
-	
-    <section style="scroll-snap-align: end;">
-        <article>
-            Contact
-            <ul>
-                <l1>
-                    <a href="#"> Project 1 </a>
-                    <a href="#"> Project 2 </a>
-                    <a href="#"> Project 3 </a>
-                    <a href="#"> Project 4 </a>
-                    <a href="#"> Project 5 </a>
-                </l1>
-            </ul>
-        </article>
-    </section>
-    <nav>
-        {#each ranges as section, i}
-           <div class="section-indicator" class:active={activeSection === i} 
-                on:click={() => scrollContainer.scrollTo({top: section.offset, behavior: 'smooth'})}
-                on:keydown={(e) => e.key === 'Enter' && scrollContainer.scrollTo({top: section.offset, behavior: 'smooth'})}
-                >
-                <div class="inner-diamond" >
-                </div>
-           </div>   
-            
-        {/each}
-    </nav>
+    <Contact />
+    {#if $showSectionStore}
+        <nav>
+            {#each ranges as section, i}
+            <div class="section-indicator" class:active={activeSection === i} 
+                    on:click={() => scrollContainer.scrollTo({top: section.offset, behavior: 'smooth'})}
+                    on:keydown={(e) => e.key === 'Enter' && scrollContainer.scrollTo({top: section.offset, behavior: 'smooth'})}
+                    >
+                    <div class="inner-diamond" >
+                    </div>
+            </div>   
+                
+            {/each}
+        </nav>
+    {/if}
 </div>
 
 <style lang="scss">
