@@ -1,27 +1,25 @@
 <script lang="ts">
 	import ImageZoom from '$lib/components/ImageZoom.svelte';
-import type { PageServerData } from './$types';
+	import type { PageServerData } from './$types';
 
 	export let data: PageServerData;
-    let selectedImage = {
-        url: '',
-        alt: ''
-    }
-    let zoomed = false;
+	let selectedImage = {
+		url: '',
+		alt: ''
+	};
+	let zoomed = false;
 </script>
 
 <article>
 	<section class="title">
 		<a class="go-back" href="/">
-			<span class="material-symbols-outlined" style="font-size: 2rem;">
-				arrow_back_ios_new				
-			</span>
+			<span class="material-symbols-outlined" style="font-size: 2rem;"> arrow_back_ios_new </span>
 		</a>
 		<h1>{data.name}</h1>
-        {#each data.links as link}
-            <a href="{link.url}" target="_blank">{link.name}</a>
-        {/each}
-    </section>
+		{#each data.links as link}
+			<a href={link.url} target="_blank">{link.name}</a>
+		{/each}
+	</section>
 	<section>
 		<h2>Description</h2>
 		<p>
@@ -57,21 +55,24 @@ import type { PageServerData } from './$types';
 			<h2>Images</h2>
 			<div class="images">
 				{#each data.images as image}
-					<img src={image.url} alt={image.alt} on:click={() => {
-                        selectedImage = image;
-                        zoomed = true;
-                    }}
-                    on:keydown={e => e.key === 'Enter' && (selectedImage = image, zoomed = true)}
-                    
-                    />
+					<img
+						src={image.url}
+						alt={image.alt}
+						on:click={() => {
+							selectedImage = image;
+							zoomed = true;
+						}}
+						on:keydown={(e) => e.key === 'Enter' && ((selectedImage = image), (zoomed = true))}
+					/>
 				{/each}
 			</div>
 		</section>
 	{/if}
 </article>
 {#if zoomed}
-    <ImageZoom {selectedImage} on:close={() => zoomed = false} />
+	<ImageZoom {selectedImage} on:close={() => (zoomed = false)} />
 {/if}
+
 <style lang="scss">
 	article {
 		width: 100%;
@@ -100,32 +101,32 @@ import type { PageServerData } from './$types';
 			padding-left: 1rem;
 		}
 	}
-    section{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        &.title{
-            flex-direction: row;
-            align-items: flex-end;
-            a{
-                padding-bottom: 1rem;
-                font-family: 'Nunito Sans', sans-serif;
-                text-transform: lowercase;
-                &:hover{
-                    text-decoration: underline;
-                }
-            }
-			.go-back{
+	section {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		&.title {
+			flex-direction: row;
+			align-items: flex-end;
+			a {
+				padding-bottom: 1rem;
+				font-family: 'Nunito Sans', sans-serif;
+				text-transform: lowercase;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+			.go-back {
 				align-self: center;
 				padding-bottom: 0;
 				scale: 0.8;
-				&:hover{
+				&:hover {
 					cursor: pointer;
 				}
 			}
 		}
-    }
+	}
 
 	.images {
 		width: 100%;
@@ -133,18 +134,16 @@ import type { PageServerData } from './$types';
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		grid-gap: 8px;
 		img {
-            width: 100%;
-            cursor: pointer;
+			width: 100%;
+			cursor: pointer;
+			aspect-ratio: 16/9;
 			height: 100%;
-			object-fit: cover;
+			object-fit: contain;
 			border: 1px solid var(--primary);
 			box-shadow: 2px 2px 0 0 var(--accent);
-            &:hover{
-                filter: brightness(1.2);
-            }
+			&:hover {
+				filter: brightness(1.2);
+			}
 		}
 	}
-
-
-    
 </style>

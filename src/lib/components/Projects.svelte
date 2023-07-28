@@ -1,96 +1,100 @@
 <script lang="ts">
-	import type { Project } from "$lib/models/project.model";
-	
-	import ActiveProject from "./ActiveProject.svelte";
+	import type { Project } from '$lib/models/project.model';
 
-	let projects:Project[] = [
+	import ActiveProject from './ActiveProject.svelte';
+
+	let projects: Project[] = [
 		{
-			name: "Eos",
+			name: 'Eos',
 			description: `
 				Eos is a starterpage that combines the things I use the most when I launch 
 				a new tab with extra functionality including notetaking, RSS feed aggregation,
 				spotify tracking stats and more.
 			`,
-			coverImage: "/covers/eos.png"
+			coverImage: '/covers/eos.png'
 		},
 		{
-			name: "Rhea",
-			description:`
+			name: 'Rhea',
+			description: `
 				Rhea is <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a> simulator that I made in my free time.
 				It's a simple project that I made to get to know the framework better. A difference I wanted to have from other game of life simulators is that
 				the simulation loops around the edges of the grid, so that the cells on the edges can interact with the cells on the opposite side.
 				It also comes with a panel that allows you to create patterns and use them as a brush to draw on the grid.
 			`,
-			coverImage: "/covers/rhea.png"
+			coverImage: '/covers/rhea.png'
 		},
 		{
-			name: "Polemos",
-			description:`
+			name: 'Polemos',
+			description: `
 				Polemos is a text based fight simulator. It draws clear inspiration from the <a href="https://brantsteele.net/hungergames/"> BrantSteele's Hunger Games Simulator</a>.
 				My friends and I liked playing around with the Hunger Games Simulator, but we wanted to make something that was more customizable that allowed for far more players, 
 				events and stat tracking between rounds to keep track of the winners and losers. So I made Polemos for us to use
 			`,
-			coverImage: "/covers/polemos.png"
+			coverImage: '/covers/polemos.png'
 		},
 		{
-			name: "Minos",
-			description:`
+			name: 'Minos',
+			description: `
 				Minos is a pathfinding visualizer that I made, my main goal with this proyect was to revisit some of the pathfinding algorithms 
 				I learned in college and to try out Next.js. In the spirit of revisiting the algorithms added a section to learn
 				more about them, their premise and how their implementation works in TypeScript.
 			`,
-			coverImage: "/covers/minos.png"
+			coverImage: '/covers/minos.png'
 		},
 		{
-			name:"Chimera",
-			description:
-				`
+			name: 'Chimera',
+			description: `
 					Chimera is a Minesweeper game that provides a daily challenge, similar to games like NYT's Wordle. Each board is unique 
 					every day, and all players are given the same starting position. It also includes a leaderboard that tracks the highest
 					winstreaks and statistics of previous days, with heatmaps to show in what bombs the players exploded the most.
 				`,
-			coverImage: "/covers/chimera.png"
+			coverImage: '/covers/chimera.png'
+		},
+		{
+			name: "Spring'83",
+			description: `
+					Spring '83 is a protocol for communication dreamed up by <a href="https://www.robinsloan.com/"> robin sloan</a>. This protocol is based on the distribution of "boards". Boards are HTML
+					fragments, limited to 2217 bytes, unable to execute JavaScript or load external resources, but otherwise unrestricted.
+					This project entailed creating both a client and a server that implements this protocol 
+					according to the specification. As well as a <a href="https://github.com/nandosobral03/spring83-keygen/" target="_blank">key generator</a> that allows users to generate their own keys.
+				`,
+			coverImage: '/covers/spring83.png'
 		}
-	
-		
-	]
+	];
 	let selected = -1;
 </script>
 
 <section>
 	<article>
 		<div>
-			<h1>
-				Projects
-			</h1>
+			<h1>Projects</h1>
 			<ul>
 				{#each projects as project}
-				<li 
-					class:active={selected === projects.indexOf(project)}
-					on:click={() => {
-						selected = -1;
-						setTimeout(() => selected = projects.indexOf(project), 150);
-					}}
-					on:keydown={(e) => {if(e.key === "Enter") selected = projects.indexOf(project)}}>
-					
-					{project.name} 
-
-				</li>
+					<li
+						class:active={selected === projects.indexOf(project)}
+						on:click={() => {
+							selected = -1;
+							setTimeout(() => (selected = projects.indexOf(project)), 150);
+						}}
+						on:keydown={(e) => {
+							if (e.key === 'Enter') selected = projects.indexOf(project);
+						}}
+					>
+						{project.name}
+					</li>
 				{/each}
 			</ul>
 		</div>
 		{#if selected >= 0}
-			<div class="active-project" >
-					<ActiveProject project={projects[selected]} on:close={() => selected = -1} />
+			<div class="active-project">
+				<ActiveProject project={projects[selected]} on:close={() => (selected = -1)} />
 			</div>
 		{/if}
 	</article>
-	
 </section>
 
 <style lang="scss">
-
-	section{
+	section {
 		display: flex;
 		flex-direction: column;
 	}
@@ -102,25 +106,24 @@
 		font-family: 'Nunito Sans', sans-serif;
 	}
 
-	article{
+	article {
 		padding: clamp(1rem, 3vw, 2rem);
 		display: flex;
-		
+
 		flex-direction: row;
-		gap: 1rem;
 		flex-grow: 1;
-		div{
+		div {
 			flex: 1;
 			display: flex;
 			flex-direction: column;
-			gap: 1rem;
-			ul{
+			gap: 3rem;
+			ul {
 				display: flex;
 				flex-direction: column;
 				gap: 1rem;
 				height: 100%;
 				list-style: none;
-				li{
+				li {
 					width: fit-content;
 					cursor: pointer;
 					color: var(--primary);
@@ -129,10 +132,10 @@
 					font-weight: 400;
 					font-size: clamp(1rem, 4vw, 2rem);
 					user-select: none;
-					&:hover{
+					&:hover {
 						text-decoration: underline;
 					}
-					&.active{
+					&.active {
 						color: var(--accent);
 						scale: 1.2;
 						translate: 0.5rem;
@@ -142,8 +145,10 @@
 		}
 	}
 
-	.active-project{
-		@media (max-width: 768px){
+	.active-project {
+		box-shadow: 5px 5px 0 0 var(--accent);
+		@media (max-width: 768px) {
+			box-shadow: none;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -153,7 +158,4 @@
 			width: 100%;
 		}
 	}
-
-
-	
 </style>

@@ -127,6 +127,7 @@
 		width: 100%;
 		height: 100%;
         border: 2px solid var(--primary);
+		
 		background-color: var(--background);
 		:global(#particles) {
 		position: absolute;
@@ -149,7 +150,7 @@
 		padding: clamp(0.5rem, 3vw, 1rem);
 		position: relative;
 		max-height: 100%;
-		
+		 box-shadow: 5px 5px 0 0 var(--accent);
 		overflow: auto;
 		:global(canvas){
 			position: absolute !important;

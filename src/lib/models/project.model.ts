@@ -3,6 +3,7 @@ import { eos } from "./projects/eos";
 import { minos } from "./projects/minos";
 import { polemos } from "./projects/polemos";
 import { rhea } from "./projects/rhea";
+import { spring83 } from "./projects/spring83";
 
 export type Project = {
     name: string;
@@ -29,3 +30,4 @@ projects.set("rhea", rhea);
 projects.set("polemos", polemos);
 projects.set("minos", minos);
 projects.set("chimera", chimera);
+projects.set("spring'83", spring83);
