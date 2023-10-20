@@ -1,9 +1,11 @@
 import { chimera } from "./projects/chimera";
 import { eos } from "./projects/eos";
 import { minos } from "./projects/minos";
+import { nochan } from "./projects/nochan";
 import { polemos } from "./projects/polemos";
 import { rhea } from "./projects/rhea";
 import { spring83 } from "./projects/spring83";
+import { deadair } from "./projects/deadair";
 
 export type Project = {
     name: string;
@@ -31,3 +33,5 @@ projects.set("polemos", polemos);
 projects.set("minos", minos);
 projects.set("chimera", chimera);
 projects.set("spring'83", spring83);
+projects.set("nochan", nochan);
+projects.set("deadair", deadair);

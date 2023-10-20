@@ -59,6 +59,23 @@
 					according to the specification. As well as a <a href="https://github.com/nandosobral03/spring83-keygen/" target="_blank">key generator</a> that allows users to generate their own keys.
 				`,
 			coverImage: '/covers/spring83.png'
+		},
+		{
+			name: 'Nochan',
+			description: `
+					nochan is a ephemeral imageboard that I made as a way to learn more about Next, Tailwind and Bun! It allows users to create threads and 
+					post images that are stored in a database and are deleted after 24 hours. 
+				`,
+			coverImage: '/covers/nochan.png'
+		},
+		{
+			name: 'Deadair',
+			description: `
+				Deadair is a new way to watch youtube in the background. It allows you to create a "channels" with set schedules that run throughout the week, 
+				allowing you to hop in and out of the constantstream of content, just like a TV channel would. It also allows you to create your own channels
+				and share them with your friends.
+			`,
+			coverImage: '/covers/deadair.png'
 		}
 	];
 	let selected = -1;

@@ -4,11 +4,11 @@ export const eos: ProjectDetails = {
     name: "Eos",
     links: [
         {
-            url: "https://github.com/nandosobral03/minos/",
+            url: "https://github.com/nandosobral03/eos/",
             name: "Github"
         },
         {
-            url: "http://minos.aornum.xyz/visualizer",
+            url: "http://eos.aornum.xyz",
             name: "Live"
         }
     ],
@@ -111,5 +111,5 @@ export const eos: ProjectDetails = {
             alt: "Page without the bottom right modal and no tabs selected"
         },
     ]
-    
+
 }
