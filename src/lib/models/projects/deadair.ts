@@ -36,7 +36,7 @@ export const deadair: ProjectDetails = {
         preconceptions about it but I've come to really like it. I also express as my backend framework, I've been using it for a while now and I'm very comfortable with it. I also used Typescript for the backend, with a Sqlite database for simplicity.
         <br><br>
         When it comes to new techonologies for me, I decided to give Kysely a try, it's a new SQL query builder for Typescript that I've been wanting to try out for a while now. And this project seemed like a good fit for it. 
-        I used the google API's to fetch videos based on their URL or a given playlist ID. I also used the youtube-dl library to fetch metadata from youtube videos, like the thumbnail and the duration, those are saved into the database 
+        I used the google API's to fetch videos based on their URL or a given playlist ID. I also used the youtube API library to fetch metadata from youtube videos, like the thumbnail and the duration, those are saved into the database 
         and used to display the videos in the channel. Users can create their own channels where they can add videos and set a schedule for them to run on.
         <br><br>
         It was also my first time using the imgur API, I used it to upload the channel thumbnails. Surprisingly it was very easy to use and I was able to get it working in no time. And considering
