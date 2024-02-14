@@ -7,10 +7,6 @@ export const nochan: ProjectDetails = {
             url: "https://github.com/nandosobral03/nochan/",
             name: "Github"
         },
-        {
-            url: "https://nochan.aornum.xyz",
-            name: "Live"
-        },
     ],
     description: `
         This project is a simple <a href="https://en.wikipedia.org/wiki/Imageboard">imageboard</a> inspired by the family of "chan" websites,
@@ -49,7 +45,7 @@ export const nochan: ProjectDetails = {
         <br>
         `,
     thingsLearned: `
-        This project was a great way to learn more about Next.js, I felt like my use React has improved greatly from my last project. My usage of React hooks has improved and escaped useEfect hell. 
+        This project was a great way to learn more about Next.js, I felt like my use React has improved greatly from my last project. My usage of React hooks has improved and escaped useEffect hell. 
         I also got to use Next.js' server side rendering, using cookies to fetch the data as the user and rendering all posts, many of the 
         things I learned in SveteKit were also applicable here, like the use of cookies and layouts.
         <br>

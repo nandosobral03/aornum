@@ -76,6 +76,14 @@
 				and share them with your friends.
 			`,
 			coverImage: '/covers/deadair.png'
+		},
+		{
+			name: 'Momentum',
+			description: `
+				Momentum is a daily habit tracker that I made to help me keep track of my habits. It allows you to create habits lists and challenges that you 
+				and other users can subscribe to and complete, getting badges and rewards for completing them. 
+			`,
+			coverImage: '/covers/momentum.png'
 		}
 	];
 	let selected = -1;
@@ -147,7 +155,7 @@
 					border-radius: 1rem;
 					font-family: 'Nunito Sans', sans-serif;
 					font-weight: 400;
-					font-size: clamp(1rem, 4vw, 2rem);
+					font-size: clamp(1rem, 3vw, 1.5rem);
 					user-select: none;
 					&:hover {
 						text-decoration: underline;
