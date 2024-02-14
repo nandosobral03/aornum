@@ -8,7 +8,7 @@ export const momentum: ProjectDetails = {
             name: "Github"
         },
         {
-            url: "https://momentum.aornum.xyz",
+            url: "https://momentum-git-main-nandosobral03.vercel.app/",
             name: "Live"
         },
     ],
@@ -36,9 +36,7 @@ export const momentum: ProjectDetails = {
         <br>
         As for the frontend I used Tailwind again and I'm glad I did it's a great way to style the website and I was able to make it look very similar to the original without having to write a lot of CSS. I decided not to make it responsive since it's a web app and I wanted to focus on the desktop experience. I also the shadcn component library to create the app making the process much easier and aesthetically consistent.
         <br>
-
-    
-        `,
+        Also managed the deploy using Vercel which was a great experience, for Next.js is the easiest way to deploy a project no doubt`,
     thingsLearned: `
         This project was a great way to learn more about Next.js, I felt like my use React has improved greatly from my last project. My usage of React overall has improved and I was able to use it in a more idiomatic way. I also got to use Next.js' server side rendering, using cookies to fetch the data as the user and rendering all posts, identifying those made by the user serverside.
 
