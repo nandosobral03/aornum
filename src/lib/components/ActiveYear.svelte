@@ -45,7 +45,7 @@
     }
 
 </script>
-<div class="active-project" in:fade out:fade={{duration: 0}}>
+<div class="active-project" in:fade|global out:fade|global={{duration: 0}}>
     <header>
         <h2>
             {year} Projects

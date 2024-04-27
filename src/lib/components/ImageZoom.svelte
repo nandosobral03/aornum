@@ -13,7 +13,7 @@
 <div 
     on:click={() => dispatch('close')} 
     on:keydown={(e) => e.key === 'Escape' && dispatch('close')}
-    transition:fade={
+    transition:fade|global={
         {
             duration: 150,
         }
