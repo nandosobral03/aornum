@@ -9,7 +9,8 @@
 		<h2>Full Stack Developer</h2>
 	</article>
 	<div class="bio-container">
-		<button
+		<button 
+			style="visibility: hidden;"
 			on:click={() => {
 				// Open pdf
 				window.open('/ResumeEN.pdf', '_blank');
@@ -19,12 +20,12 @@
 		</button>
 		<article class="bio">
 			<p>
-				I am a {parseInt(age.toString())}-year-old developer and soon to be Software Engineer from
-				ORT University in Uruguay. I have been working as a Full Stack Developer for the past 2
-				years at
-				<a href="https://2innovateit.com/" target="_blank">2innovate</a>. Some of the technologies I
-				have been working with lately include: React(Next.js), Svelte/Sveltekit, Node.js (Express),
-				Rust(Axum), PostgreSQL, SQLite, Docker, among others.
+				I am a {parseInt(age.toString())}-year-old developer and  Software Engineer from
+				 Uruguay. I'm currently working as a Ssr. Full Stack Developer at 
+				<a href="https://eagerworks.com/" target="_blank">Eagerworks</a>. I love to learn new technologies and build things for the 
+				sake of building them. Some of the technologies I 
+				have been working with lately include: React(Next.js),Node.js (Express/tRPC),  Svelte/Sveltekit, 
+				Rust, Docker, among others.
 			</p>
 		</article>
 	</div>

@@ -1,10 +1,12 @@
 <script lang="ts">
 	import type { Project } from '$lib/models/project.model';
-
+	import ActiveYear from './ActiveYear.svelte';
 	import ActiveProject from './ActiveProject.svelte';
+	import Collapsable from './Collapsable.svelte';
 
 	let projects: Project[] = [
 		{
+			year: 2023,
 			name: 'Eos',
 			description: `
 				Eos is a starterpage that combines the things I use the most when I launch 
@@ -14,6 +16,7 @@
 			coverImage: '/covers/eos.png'
 		},
 		{
+			year: 2023,
 			name: 'Rhea',
 			description: `
 				Rhea is <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a> simulator that I made in my free time.
@@ -24,6 +27,7 @@
 			coverImage: '/covers/rhea.png'
 		},
 		{
+			year: 2023,
 			name: 'Polemos',
 			description: `
 				Polemos is a text based fight simulator. It draws clear inspiration from the <a href="https://brantsteele.net/hungergames/"> BrantSteele's Hunger Games Simulator</a>.
@@ -33,6 +37,7 @@
 			coverImage: '/covers/polemos.png'
 		},
 		{
+			year: 2023,
 			name: 'Minos',
 			description: `
 				Minos is a pathfinding visualizer that I made, my main goal with this proyect was to revisit some of the pathfinding algorithms 
@@ -42,6 +47,7 @@
 			coverImage: '/covers/minos.png'
 		},
 		{
+			year: 2023,
 			name: 'Chimera',
 			description: `
 					Chimera is a Minesweeper game that provides a daily challenge, similar to games like NYT's Wordle. Each board is unique 
@@ -51,6 +57,7 @@
 			coverImage: '/covers/chimera.png'
 		},
 		{
+			year: 2023,
 			name: "Spring'83",
 			description: `
 					Spring '83 is a protocol for communication dreamed up by <a href="https://www.robinsloan.com/"> robin sloan</a>. This protocol is based on the distribution of "boards". Boards are HTML
@@ -61,6 +68,7 @@
 			coverImage: '/covers/spring83.png'
 		},
 		{
+			year: 2023,
 			name: 'Nochan',
 			description: `
 					nochan is a ephemeral imageboard that I made as a way to learn more about Next, Tailwind and Bun! It allows users to create threads and 
@@ -69,6 +77,7 @@
 			coverImage: '/covers/nochan.png'
 		},
 		{
+			year: 2023,
 			name: 'Deadair',
 			description: `
 				Deadair is a new way to watch youtube in the background. It allows you to create a "channels" with set schedules that run throughout the week, 
@@ -78,41 +87,89 @@
 			coverImage: '/covers/deadair.png'
 		},
 		{
+			year: 2024,
 			name: 'Momentum',
 			description: `
 				Momentum is a daily habit tracker that I made to help me keep track of my habits. It allows you to create habits lists and challenges that you 
 				and other users can subscribe to and complete, getting badges and rewards for completing them. 
 			`,
 			coverImage: '/covers/momentum.png'
-		}
+		},
+		{
+			year: 2024,
+			name: 'Today In',
+			description: `
+				Today In is a subreddit post aggregator that allows you to see a summary of the top posts of the day in a subreddit. Giving you a quick overview of 
+				the sentiment of the subreddit and the most popular posts and comments so far. It uses Google's Gemini to summarize the content and give 
+				the user a newspaper-like experience.
+			`,
+			coverImage: '/covers/todayin.png'
+		},
 	];
 	let selected = -1;
+	let activeYear = -1;
+	let showYearInfo = false;
+
+	let projectsByYear = projects.reduce((acc, project) => {
+		if (!acc[project.year]) acc[project.year] = [];
+		acc[project.year].push(project);
+		return acc;
+	}, {} as Record<number, Project[]>);
 </script>
 
 <section>
 	<article>
 		<div>
 			<h1>Projects</h1>
-			<ul>
-				{#each projects as project}
-					<li
-						class:active={selected === projects.indexOf(project)}
-						on:click={() => {
+			<div>
+				{#each Object.keys(projectsByYear) as year}
+					<Collapsable
+						headerText={`${year} Projects`}
+						on:toggle={() => {
+							if (!showYearInfo && activeYear == parseInt(year)) {
+								showYearInfo = true;
+							} else {
+								activeYear == parseInt(year) ? (showYearInfo = false) : (showYearInfo = true);
+								activeYear == parseInt(year) ? (activeYear = -1) : (activeYear = parseInt(year));
+							}
 							selected = -1;
-							setTimeout(() => (selected = projects.indexOf(project)), 150);
 						}}
-						on:keydown={(e) => {
-							if (e.key === 'Enter') selected = projects.indexOf(project);
-						}}
+						expanded={activeYear == parseInt(year)}
 					>
-						{project.name}
-					</li>
+						<ul>
+							{#each projectsByYear[parseInt(year)] as project}
+								<li
+									class:active={selected === projects.indexOf(project)}
+									on:click={() => {
+										if (selected === projects.indexOf(project)) {
+											selected = -1;
+											showYearInfo = false;
+										} else {
+											selected = -1;
+											showYearInfo = false;
+											setTimeout(() => (selected = projects.indexOf(project)), 150);
+										}
+									}}
+									on:keydown={(e) => {
+										if (e.key === 'Enter') selected = projects.indexOf(project);
+									}}
+								>
+									{project.name}
+								</li>
+							{/each}
+						</ul>
+					</Collapsable>
 				{/each}
-			</ul>
+			</div>
 		</div>
 		{#if selected >= 0}
 			<div class="active-project">
 				<ActiveProject project={projects[selected]} on:close={() => (selected = -1)} />
+			</div>
+		{/if}
+		{#if selected == -1 && activeYear != -1 && showYearInfo}
+			<div class="active-project">
+				<ActiveYear year={activeYear} on:close={() => (selected = -1)} />
 			</div>
 		{/if}
 	</article>
@@ -128,7 +185,6 @@
 		font-size: clamp(2rem, 8vw, 4rem);
 		font-weight: 700;
 		color: var(--primary);
-		font-family: 'Nunito Sans', sans-serif;
 	}
 
 	article {
@@ -141,7 +197,7 @@
 			flex: 1;
 			display: flex;
 			flex-direction: column;
-			gap: 3rem;
+			gap: 1rem;
 			ul {
 				display: flex;
 				flex-direction: column;

@@ -1,16 +1,19 @@
 import { chimera } from "./projects/chimera";
+import { deadair } from "./projects/deadair";
 import { eos } from "./projects/eos";
 import { minos } from "./projects/minos";
+import { momentum } from "./projects/momentum";
 import { nochan } from "./projects/nochan";
 import { polemos } from "./projects/polemos";
 import { rhea } from "./projects/rhea";
 import { spring83 } from "./projects/spring83";
-import { deadair } from "./projects/deadair";
-import { momentum } from "./projects/momentum";
+import { todayin } from "./projects/todayin";
+
 export type Project = {
     name: string;
     description: string;
     coverImage: string;
+    year: number;
 }
 
 export type ProjectDetails = {
@@ -36,3 +39,4 @@ projects.set("spring'83", spring83);
 projects.set("nochan", nochan);
 projects.set("deadair", deadair);
 projects.set("momentum", momentum);
+projects.set("today in", todayin);

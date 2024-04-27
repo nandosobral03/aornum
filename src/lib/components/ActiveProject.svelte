@@ -19,7 +19,7 @@
         }
     })
 </script>
-<div class="active-project" transition:fade>
+<div class="active-project" in:fade out:fade={{duration: 0}}>
     <header>
         <h2>
             {project.name}
