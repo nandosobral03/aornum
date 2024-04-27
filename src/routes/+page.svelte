@@ -3,7 +3,7 @@
 	import Projects from '../lib/components/Projects.svelte';
 	import Bio from '../lib/components/Bio.svelte';
 	import Contact from '$lib/components/Contact.svelte';
-	import { showSectionStore } from '$lib/stores/uiStore';
+	import { showSectionStore } from '$lib/stores/uistore';
     let activeSection = 0;
     let scrollContainer: HTMLDivElement;
     let ranges: { offset: number, height: number }[] = [];
