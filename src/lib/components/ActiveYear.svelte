@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import { browser } from "$app/environment";
-	import {showDarkModeStore, showSectionStore} from "$lib/stores/uiStore";
+	import {showDarkModeStore, showSectionStore} from "$lib/stores/uistore";
 	import { createEventDispatcher, onMount } from "svelte";
 	import { fade, slide } from "svelte/transition";
     export let year: number;
