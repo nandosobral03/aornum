@@ -44,7 +44,7 @@ export const todayin: ProjectDetails = {
         reverse proxy.
     `,
     thingsLearned: `
-        This project was a great way to learn more about LLMs, using LLM's inside code feels weird, having to craft a prompt that makes sense and then
+        This project was a great way to learn more about LLMs, using LLMs inside code feels weird, having to craft a prompt that makes sense and then
         pray that the model will understand it and give you a good response. It's a bit like trying to get a kid to do something, but the kid is a model 
         which took several hundred hours to train and probably a couple decades of research to get to the point where it can understand what you're asking.
         I learned quite a bit about creating a prompt that the model understands and knows how to respond to without finetuning the model.
