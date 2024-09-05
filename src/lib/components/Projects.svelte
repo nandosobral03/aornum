@@ -9,7 +9,7 @@
 			year: 2023,
 			name: 'Eos',
 			description: `
-				Eos is a starterpage that combines the things I use the most when I launch 
+				Eos is a starterpage that combines the things I use the most when I launch
 				a new tab with extra functionality including notetaking, RSS feed aggregation,
 				spotify tracking stats and more.
 			`,
@@ -31,7 +31,7 @@
 			name: 'Polemos',
 			description: `
 				Polemos is a text based fight simulator. It draws clear inspiration from the <a href="https://brantsteele.net/hungergames/"> BrantSteele's Hunger Games Simulator</a>.
-				My friends and I liked playing around with the Hunger Games Simulator, but we wanted to make something that was more customizable that allowed for far more players, 
+				My friends and I liked playing around with the Hunger Games Simulator, but we wanted to make something that was more customizable that allowed for far more players,
 				events and stat tracking between rounds to keep track of the winners and losers. So I made Polemos for us to use
 			`,
 			coverImage: '/covers/polemos.png'
@@ -40,7 +40,7 @@
 			year: 2023,
 			name: 'Minos',
 			description: `
-				Minos is a pathfinding visualizer that I made, my main goal with this proyect was to revisit some of the pathfinding algorithms 
+				Minos is a pathfinding visualizer that I made, my main goal with this proyect was to revisit some of the pathfinding algorithms
 				I learned in college and to try out Next.js. In the spirit of revisiting the algorithms added a section to learn
 				more about them, their premise and how their implementation works in TypeScript.
 			`,
@@ -50,7 +50,7 @@
 			year: 2023,
 			name: 'Chimera',
 			description: `
-					Chimera is a Minesweeper game that provides a daily challenge, similar to games like NYT's Wordle. Each board is unique 
+					Chimera is a Minesweeper game that provides a daily challenge, similar to games like NYT's Wordle. Each board is unique
 					every day, and all players are given the same starting position. It also includes a leaderboard that tracks the highest
 					winstreaks and statistics of previous days, with heatmaps to show in what bombs the players exploded the most.
 				`,
@@ -62,7 +62,7 @@
 			description: `
 					Spring '83 is a protocol for communication dreamed up by <a href="https://www.robinsloan.com/"> robin sloan</a>. This protocol is based on the distribution of "boards". Boards are HTML
 					fragments, limited to 2217 bytes, unable to execute JavaScript or load external resources, but otherwise unrestricted.
-					This project entailed creating both a client and a server that implements this protocol 
+					This project entailed creating both a client and a server that implements this protocol
 					according to the specification. As well as a <a href="https://github.com/nandosobral03/spring83-keygen/" target="_blank">key generator</a> that allows users to generate their own keys.
 				`,
 			coverImage: '/covers/spring83.png'
@@ -71,8 +71,8 @@
 			year: 2023,
 			name: 'Nochan',
 			description: `
-					nochan is a ephemeral imageboard that I made as a way to learn more about Next, Tailwind and Bun! It allows users to create threads and 
-					post images that are stored in a database and are deleted after 24 hours. 
+					nochan is a ephemeral imageboard that I made as a way to learn more about Next, Tailwind and Bun! It allows users to create threads and
+					post images that are stored in a database and are deleted after 24 hours.
 				`,
 			coverImage: '/covers/nochan.png'
 		},
@@ -80,7 +80,7 @@
 			year: 2023,
 			name: 'Deadair',
 			description: `
-				Deadair is a new way to watch youtube in the background. It allows you to create a "channels" with set schedules that run throughout the week, 
+				Deadair is a new way to watch youtube in the background. It allows you to create a "channels" with set schedules that run throughout the week,
 				allowing you to hop in and out of the constantstream of content, just like a TV channel would. It also allows you to create your own channels
 				and share them with your friends.
 			`,
@@ -90,8 +90,8 @@
 			year: 2024,
 			name: 'Momentum',
 			description: `
-				Momentum is a daily habit tracker that I made to help me keep track of my habits. It allows you to create habits lists and challenges that you 
-				and other users can subscribe to and complete, getting badges and rewards for completing them. 
+				Momentum is a daily habit tracker that I made to help me keep track of my habits. It allows you to create habits lists and challenges that you
+				and other users can subscribe to and complete, getting badges and rewards for completing them.
 			`,
 			coverImage: '/covers/momentum.png'
 		},
@@ -99,12 +99,20 @@
 			year: 2024,
 			name: 'Today In',
 			description: `
-				Today In is a subreddit post aggregator that allows you to see a summary of the top posts of the day in a subreddit. Giving you a quick overview of 
-				the sentiment of the subreddit and the most popular posts and comments so far. It uses Google's Gemini to summarize the content and give 
+				Today In is a subreddit post aggregator that allows you to see a summary of the top posts of the day in a subreddit. Giving you a quick overview of
+				the sentiment of the subreddit and the most popular posts and comments so far. It uses Google's Gemini to summarize the content and give
 				the user a newspaper-like experience.
 			`,
 			coverImage: '/covers/todayin.png'
 		},
+		{
+			year: 2024,
+			name: 'Polemos Royale',
+			description: `
+			Polemos Royale is a remake of the original Polemos, but with a battle royale twist. It allows for more players, more events and more customization and a map through which the players can move and roll dice to determine the outcome of the events.
+			`,
+			coverImage: '/covers/polemos-royale.png'
+		}
 	];
 	let selected = -1;
 	let activeYear = -1;
@@ -169,7 +177,17 @@
 		{/if}
 		{#if selected == -1 && activeYear != -1 && showYearInfo}
 			<div class="active-project">
-				<ActiveYear year={activeYear} on:close={() => (selected = -1)} />
+				<ActiveYear
+					year={activeYear}
+					projects={projectsByYear[activeYear]}
+					on:close={() => {
+						selected = -1;
+						activeYear = -1;
+					}}
+					on:select={(e) => {
+						selected = projects.indexOf(e.detail.project);
+					}}
+				/>
 			</div>
 		{/if}
 	</article>
