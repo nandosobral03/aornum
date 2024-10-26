@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Project } from '$lib/models/project.model';
-	import ActiveYear from './ActiveYear.svelte';
 	import ActiveProject from './ActiveProject.svelte';
+	import ActiveYear from './ActiveYear.svelte';
 	import Collapsable from './Collapsable.svelte';
 
 	let projects: Project[] = [
@@ -112,6 +112,14 @@
 			Polemos Royale is a remake of the original Polemos, but with a battle royale twist. It allows for more players, more events and more customization and a map through which the players can move and roll dice to determine the outcome of the events.
 			`,
 			coverImage: '/covers/polemos-royale.png'
+		},
+		{
+			year: 2024,
+			name: 'React Bonsai',
+			description: `
+			React Bonsai is a bonsai tree generator, written in react using typescript. It intelligently creates, colors, and positions a bonsai tree, and is entirely configurable
+			`,
+			coverImage: '/covers/react-bonsai.png'
 		}
 	];
 	let selected = -1;
