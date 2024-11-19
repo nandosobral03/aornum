@@ -10,7 +10,7 @@ import { reactBonsai } from './projects/react-bonsai';
 import { rhea } from './projects/rhea';
 import { spring83 } from './projects/spring83';
 import { todayin } from './projects/todayin';
-
+import { mushare } from './projects/mushare';
 export type Project = {
 	name: string;
 	description: string;
@@ -44,3 +44,4 @@ projects.set('momentum', momentum);
 projects.set('today in', todayin);
 projects.set('polemos royale', polemosRoyale);
 projects.set('react bonsai', reactBonsai);
+projects.set('mushare', mushare);

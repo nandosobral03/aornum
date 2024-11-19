@@ -120,6 +120,14 @@
 			React Bonsai is a bonsai tree generator, written in react using typescript. It intelligently creates, colors, and positions a bonsai tree, and is entirely configurable
 			`,
 			coverImage: '/covers/react-bonsai.png'
+		},
+		{
+			year: 2024,
+			name: 'Mushare',
+			description: `
+			Mushare is a music sharing platform that allows you to create and share music charts and grids with your friends.
+			`,
+			coverImage: '/covers/mushare.png'
 		}
 	];
 	let selected = -1;
