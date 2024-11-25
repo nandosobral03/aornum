@@ -11,6 +11,7 @@ import { rhea } from './projects/rhea';
 import { spring83 } from './projects/spring83';
 import { todayin } from './projects/todayin';
 import { mushare } from './projects/mushare';
+import { fourCombinator } from './projects/4combinator';
 export type Project = {
 	name: string;
 	description: string;
@@ -45,3 +46,4 @@ projects.set('today in', todayin);
 projects.set('polemos royale', polemosRoyale);
 projects.set('react bonsai', reactBonsai);
 projects.set('mushare', mushare);
+projects.set('4combinator', fourCombinator);

@@ -128,6 +128,14 @@
 			Mushare is a music sharing platform that allows you to create and share music charts and grids with your friends.
 			`,
 			coverImage: '/covers/mushare.png'
+		},
+		{
+			year: 2024,
+			name: '4combinator',
+			description: `
+			4combinator is an app that allows you to browse 4chan in a hacker-news like interface.
+			`,
+			coverImage: '/covers/4combinator.png'
 		}
 	];
 	let selected = -1;
